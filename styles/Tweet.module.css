@@ -1,0 +1,5 @@
+.extra_stuffs {
+  -webkit-box-shadow: 1px 29px 35px -38px rgba(0,0,0,0.75);
+  -moz-box-shadow: 1px 29px 35px -38px rgba(0,0,0,0.75);
+  box-shadow: 1px 29px 35px -38px rgba(0,0,0,0.75);
+}

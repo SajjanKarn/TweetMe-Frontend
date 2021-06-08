@@ -1,0 +1,7 @@
+.box_card {
+  width: 18rem;
+  -webkit-box-shadow: -1px 5px 68px -16px rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: -1px 5px 68px -16px rgba(0, 0, 0, 0.22);
+  box-shadow: -1px 5px 68px -16px rgba(0, 0, 0, 0.22);
+  border: 1px solid gray;
+}
