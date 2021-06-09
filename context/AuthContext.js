@@ -57,7 +57,11 @@ export const AuthContextProvider = ({ children }) => {
       })
       .catch((err) => {
         // 403 status...
-        if (router.pathname === "/account/dashboard" || router.pathname === "/tweets") {
+        if (
+          router.pathname === "/account/dashboard" ||
+          router.pathname === "/tweets" ||
+          router.pathname === "/tweets/add"
+        ) {
           router.push("/account/login");
           return;
         }

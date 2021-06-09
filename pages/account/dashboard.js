@@ -38,30 +38,28 @@ export default function Dashboard({ userData, tweets }) {
 export async function getServerSideProps({ req }) {
   const { token } = parseCookie(req);
 
-  const res = await fetch(`${API_URL}/api/user/profile`, {
-    headers: {
-      Authorization: `Bearer ${token ? token : ""}`,
-    },
-  });
-  const userData = await res.json();
+  if (token) {
+    const res = await fetch(`${API_URL}/api/user/profile`, {
+      headers: {
+        Authorization: `Bearer ${token ? token : ""}`,
+      },
+    });
+    const userData = await res.json();
 
-  const tweetRes = await fetch(`${API_URL}/api/user/profile/tweets`, {
-    headers: {
-      Authorization: `Bearer ${token ? token : ""}`,
-    },
-  });
-  const tweets = await tweetRes.json();
+    const tweetRes = await fetch(`${API_URL}/api/user/profile/tweets`, {
+      headers: {
+        Authorization: `Bearer ${token ? token : ""}`,
+      },
+    });
+    const tweets = await tweetRes.json();
 
-  if (!res.ok && !tweetRes.ok) {
-    return {
-      props: {},
-    };
-  } else {
     return {
       props: {
         userData,
         tweets,
       },
     };
+  } else {
+    return { props: {} };
   }
 }

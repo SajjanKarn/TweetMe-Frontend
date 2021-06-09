@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import AuthContext from "@/context/AuthContext";
 import TweetContext from "@/context/TweetContext";
 import { useContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -6,7 +7,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function TweetAdd() {
   const [tweet, setTweet] = useState("");
+  const { user } = useContext(AuthContext);
   const { error, post_tweet } = useContext(TweetContext);
+
+  if (!user) {
+    return null;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,4 +66,4 @@ export default function TweetAdd() {
       </p>
     </Layout>
   );
-};
+}

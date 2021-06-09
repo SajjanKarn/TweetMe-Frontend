@@ -37,22 +37,28 @@ export default function Tweet({ tweet, user }) {
           <strong>{tweet.postedBy.username}</strong>
         </h5>
         <p className="card-text">{tweet.tweet}</p>
-        <button
-          className="btn btn-primary"
-          onClick={() => like_unlike_tweet(tweet._id)}
-        >
-          {`${tweet.likes.length}  `}
-          <i
-            className={`fa ${
-              tweet.likes.includes(user._id) ? "fa-thumbs-down" : "fa-thumbs-up"
-            } ms-1`}
-            aria-hidden="true"
-          ></i>
-        </button>
-        <button className="btn btn-secondary">
-          {`${tweet.comments.length}  `}
-          <i className="fa fa-commenting-o ms-1" aria-hidden="true"></i>
-        </button>
+        {router.pathname === "/tweets" && (
+          <>
+            <button
+              className="btn btn-primary"
+              onClick={() => like_unlike_tweet(tweet._id)}
+            >
+              {`${tweet.likes.length}  `}
+              <i
+                className={`fa ${
+                  tweet.likes.includes(user._id)
+                    ? "fa-thumbs-down"
+                    : "fa-thumbs-up"
+                } ms-1`}
+                aria-hidden="true"
+              ></i>
+            </button>
+            <button className="btn btn-secondary">
+              {`${tweet.comments.length}  `}
+              <i className="fa fa-commenting-o ms-1" aria-hidden="true"></i>
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
