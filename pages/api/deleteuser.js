@@ -29,8 +29,7 @@ export default async (req, res) => {
           path: "/",
         })
       );
-      res.status(200).json({ result });
-      return;
+      return res.status(200).json(result);
     }
   } else {
     res.setHeader("Allow", ["DELETE"]);

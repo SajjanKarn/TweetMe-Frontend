@@ -27,11 +27,7 @@ export default function Dashboard({ userData, tweets }) {
         "Are you sure you want to delete you account? This will delete all your posted tweets as well."
       )
     ) {
-      const result = await deleteAccount();
-      if (result) {
-        router.push("/account/login");
-        return;
-      }
+      deleteAccount();
     }
   };
 

@@ -75,11 +75,12 @@ export const AuthContextProvider = ({ children }) => {
     });
     const result = await res.json();
 
-    if (!result.ok) {
+    if (!res.ok) {
       setError("Incorrect password");
       setError(null);
     } else {
-      return true;
+      setUser(null);
+      router.push("/account/login");
     }
   };
 
