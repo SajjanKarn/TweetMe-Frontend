@@ -68,6 +68,21 @@ export const AuthContextProvider = ({ children }) => {
       });
   };
 
+  // delete a user
+  const deleteAccount = async () => {
+    const res = await fetch(`${NEXT_URL}/api/deleteuser`, {
+      method: "DELETE",
+    });
+    const result = await res.json();
+
+    if (!result.ok) {
+      setError("Incorrect password");
+      setError(null);
+    } else {
+      return true;
+    }
+  };
+
   // logout user...
   const logout = () => {
     Axios.post(`${NEXT_URL}/api/logout`)
@@ -83,7 +98,9 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ register, login, logout, user, error }}>
+    <AuthContext.Provider
+      value={{ register, login, logout, deleteAccount, user, error }}
+    >
       {children}
     </AuthContext.Provider>
   );

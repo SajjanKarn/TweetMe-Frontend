@@ -11,13 +11,29 @@ import { parseCookie } from "@/helpers/index";
 
 import styles from "@/styles/Dashboard.module.css";
 import CustomButton from "@/components/CustomButton";
+import { useRouter } from "next/router";
 
 export default function Dashboard({ userData, tweets }) {
-  const { user } = useContext(AuthContext);
+  const { user, deleteAccount } = useContext(AuthContext);
+  const router = useRouter();
 
   if (!user) {
     return null;
   }
+
+  const handleDelete = async () => {
+    if (
+      confirm(
+        "Are you sure you want to delete you account? This will delete all your posted tweets as well."
+      )
+    ) {
+      const result = await deleteAccount();
+      if (result) {
+        router.push("/account/login");
+        return;
+      }
+    }
+  };
 
   return (
     <Layout>
@@ -25,6 +41,9 @@ export default function Dashboard({ userData, tweets }) {
         Welcome back <strong>{userData.fullname}</strong>
       </h1>
       <CustomButton href="/tweets">View All Tweets</CustomButton>
+      <button className="btn btn-danger" onClick={() => handleDelete()}>
+        Delete Account
+      </button>
 
       <div className={` mt-3 ${styles.tweets}`}>
         <ProfileCard user={userData} />
@@ -53,7 +72,7 @@ export async function getServerSideProps({ req }) {
     });
     const tweets = await tweetRes.json();
     tweets.reverse();
-    
+
     return {
       props: {
         userData,
