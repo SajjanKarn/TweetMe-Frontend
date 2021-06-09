@@ -52,7 +52,8 @@ export async function getServerSideProps({ req }) {
       },
     });
     const tweets = await tweetRes.json();
-
+    tweets.reverse();
+    
     return {
       props: {
         userData,
